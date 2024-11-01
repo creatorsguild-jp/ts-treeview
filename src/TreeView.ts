@@ -1,6 +1,6 @@
 // src/TreeView.ts
 export interface TreeViewOptions {
-  animated?: boolean;
+  animated?: boolean | 'fast' | 'slow' | number;
   collapsed?: boolean;
   unique?: boolean;
 }
@@ -35,13 +35,14 @@ export class TreeView {
     nodes.forEach(node => {
       if (node.querySelector('ul')) {
         node.classList.add(this.options.collapsed ? 'expandable' : 'collapsable');
+        // 子の <ul> を初期的に非表示に
+        (node.querySelector('ul') as HTMLElement).style.display = this.options.collapsed ? 'none' : 'block';
       } else {
         node.classList.add('file');
       }
     });
   }
 
-  // ステップ2: 初期状態の設定
   private applyInitialClasses() {
     if (this.options.collapsed) {
       this.collapseAll();
@@ -50,7 +51,6 @@ export class TreeView {
     }
   }
 
-  // ステップ3: イベントハンドラの設定
   private setupEventHandlers() {
     const folders = this.element.querySelectorAll('.expandable, .collapsable');
     folders.forEach(folder => {
@@ -58,16 +58,60 @@ export class TreeView {
     });
   }
 
-  // ステップ4: ノードの開閉
   private toggleNode(node: HTMLElement) {
     const isCollapsed = node.classList.contains('expandable');
-    node.classList.toggle('expandable', !isCollapsed);
-    node.classList.toggle('collapsable', isCollapsed);
-
     const childUl = node.querySelector('ul');
-    if (childUl) {
-      childUl.style.display = isCollapsed ? 'block' : 'none';
+    if (!childUl) return;
+
+    if (isCollapsed) {
+      this.animate(childUl as HTMLElement, true); // 開くアニメーション
+      node.classList.remove('expandable');
+      node.classList.add('collapsable');
+    } else {
+      this.animate(childUl as HTMLElement, false); // 閉じるアニメーション
+      node.classList.remove('collapsable');
+      node.classList.add('expandable');
     }
+  }
+
+  private animate(element: HTMLElement, expanding: boolean) {
+    const duration = this.getAnimationDuration();
+
+    // アニメーション開始前に一時的に display を設定して scrollHeight を取得
+    element.style.overflow = 'hidden';
+    element.style.display = 'block';
+    const startHeight = expanding ? 0 : element.scrollHeight;
+    const endHeight = expanding ? element.scrollHeight : 0;
+
+    // アニメーション開始時の高さをセット
+    element.style.height = `${startHeight}px`;
+
+    const startTime = performance.now();
+
+    const animateStep = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const height = startHeight + (endHeight - startHeight) * progress;
+
+      element.style.height = `${height}px`;
+
+      if (progress < 1) {
+        requestAnimationFrame(animateStep);
+      } else {
+        element.style.height = '';
+        element.style.overflow = '';
+        if (!expanding) element.style.display = 'none';  // 完全に閉じた後に非表示
+      }
+    };
+
+    requestAnimationFrame(animateStep);
+  }
+
+  private getAnimationDuration(): number {
+    if (typeof this.options.animated === 'number') return this.options.animated;
+    if (this.options.animated === 'fast') return 200;
+    if (this.options.animated === 'slow') return 600;
+    return 400; // デフォルトの速度
   }
 
   private collapseAll() {
