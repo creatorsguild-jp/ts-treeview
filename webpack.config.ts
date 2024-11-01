@@ -14,8 +14,8 @@ const config: ExtendedConfiguration = {
   output: {
     filename: 'ts-treeview.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'TsTreeview',
-    libraryTarget: 'umd',
+    library: 'TsTreeView', // グローバル変数としてアクセス可能にするためのライブラリ名
+    libraryTarget: 'umd', // UMD形式で出力
     globalObject: 'this',
   },
   resolve: {
@@ -36,7 +36,7 @@ const config: ExtendedConfiguration = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public', to: 'dist' },
+        { from: 'public', to: './', globOptions: { ignore: ['**/index.html'] } },
       ],
     }),
   ],

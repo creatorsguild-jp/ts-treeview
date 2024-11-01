@@ -41,7 +41,7 @@ HTMLとCSSの準備が整ったら、JavaScriptで`ts-treeview`を初期化し�
 <script src="ts-treeview.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const tree = new TsTreeview("#tree", {
+    const tree = new Treeview("#tree", {
       animated: true,
       collapsed: true,
       unique: true,
