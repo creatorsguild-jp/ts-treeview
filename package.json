@@ -1,0 +1,13 @@
+{
+  "name": "ts-treeview",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

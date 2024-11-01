@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",                           // コンパイルされるJavaScriptのECMAScriptバージョン
+    "module": "commonjs",                      // 使用するモジュールシステム
+    "outDir": "./dist",                        // コンパイルされたファイルの出力ディレクトリ
+    "rootDir": "./src",                        // コンパイルするTypeScriptファイルが存在するディレクトリ
+    "strict": true,                            // 厳格な型チェックを有効にする
+    // 他にも必要に応じてオプションを追加
+  },
+  "include": [
+    "src/**/*"                                 // コンパイルするファイルのパターン
+  ]
+}
