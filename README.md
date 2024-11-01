@@ -8,11 +8,8 @@
 
 ### 1. インストール
 
-まず、このライブラリをプロジェクトに追加します。以下の方法で`ts-treeview`をインストールしてください。
-
-```bash
-npm install ts-treeview
-```
+npm には公開していません。
+このGitHubからレポジトリーをクローンしてご使用ください。
 
 ### 2. 基本的な使用方法
 
@@ -40,16 +37,17 @@ npm install ts-treeview
 
 HTMLとCSSの準備が整ったら、JavaScriptで`ts-treeview`を初期化します。
 
-```typescript
-import TreeView from 'ts-treeview';
-
-document.addEventListener("DOMContentLoaded", () => {
-  const tree = new TreeView("#tree", {
-    animated: true,
-    collapsed: true,
-    unique: true,
+```html
+<script src="ts-treeview.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const tree = new TsTreeview("#tree", {
+      animated: true,
+      collapsed: true,
+      unique: true,
+    });
   });
-});
+</script>
 ```
 
 #### オプション
