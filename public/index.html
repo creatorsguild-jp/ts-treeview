@@ -3,9 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>ts-treeview デモ</title>
+  <link rel="stylesheet" href="styles/ts-treeview.css">
 </head>
 <body>
-  <div id="app"></div>
-  <script src="bundle.js"></script>
+  <ul id="tree">
+    <li><span class="folder">親ノード1</span>
+      <ul>
+        <li><span class="file">子ノード1-1</span></li>
+        <li><span class="file">子ノード1-2</span></li>
+      </ul>
+    </li>
+    <li><span class="folder">親ノード2</span>
+      <ul>
+        <li><span class="file">子ノード2-1</span></li>
+      </ul>
+    </li>
+  </ul>
+  <script src="ts-treeview.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tree = new TsTreeview("#tree", {
+        animated: true,
+        collapsed: true,
+        unique: true,
+      });
+    });
+  </script>
 </body>
 </html>

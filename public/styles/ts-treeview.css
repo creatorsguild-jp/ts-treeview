@@ -1,0 +1,15 @@
+/* フォルダアイコンのスタイル */
+.folder {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ファイルアイコンのスタイル */
+.file {
+  cursor: default;
+}
+
+/* 子要素の非表示 */
+.collapsed > ul {
+  display: none;
+}

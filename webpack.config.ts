@@ -2,6 +2,7 @@ import path from 'path';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 interface ExtendedConfiguration extends WebpackConfiguration {
   devServer?: DevServerConfiguration;
@@ -32,6 +33,11 @@ const config: ExtendedConfiguration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public', to: 'dist' },
+      ],
     }),
   ],
   devServer: {
