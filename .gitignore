@@ -1,0 +1,43 @@
+# Node.js関連
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript関連
+dist/
+*.tsbuildinfo
+*.d.ts
+*.js.map
+*.js
+*.d.ts.map
+
+# Build directories
+build/
+lib/
+output/
+coverage/
+
+# VSCode設定ファイル
+.vscode/
+.idea/
+
+# OSやエディタによる一時ファイル
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+
+# 環境変数ファイル
+.env
+.env.local
+.env.*.local
+
+# パッケージマネージャーロックファイル (必要に応じてコメントアウト)
+# yarn.lock
+# package-lock.json
+# pnpm-lock.yaml
+
+# その他
+*.tmp
+.cache/
