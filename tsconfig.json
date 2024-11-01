@@ -5,6 +5,8 @@
     "outDir": "./dist",                        // コンパイルされたファイルの出力ディレクトリ
     "rootDir": "./src",                        // コンパイルするTypeScriptファイルが存在するディレクトリ
     "strict": true,                            // 厳格な型チェックを有効にする
+    "esModuleInterop": true,                   // ESモジュールとの相互運用性を有効にする
+    "allowSyntheticDefaultImports": true       // default importを許可する
   },
   "include": [
     "src/**/*"                                 // コンパイルするファイルのパターン
