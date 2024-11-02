@@ -54,7 +54,13 @@ export class TreeView {
   private setupEventHandlers() {
     const folders = this.element.querySelectorAll('.expandable, .collapsable');
     folders.forEach(folder => {
-      folder.addEventListener('click', (e) => this.toggleNode(e.currentTarget as HTMLElement));
+      folder.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).tagName !== 'LI') {
+          e.stopPropagation();
+          return;
+        }
+        this.toggleNode(e.currentTarget as HTMLElement);
+      });
     });
   }
 
